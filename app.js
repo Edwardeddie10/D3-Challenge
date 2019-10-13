@@ -53,11 +53,11 @@ function yScale(censusData, chosenYAxis) {
       d3.max(censusData, d => d[chosenYAxis]) * 1.2])
     .range([height, 0]);
 
-  return yLinearScale;
+   return yLinearScale;
 }
 //xAxis variable function transformation upon update
 function renderXAxis(newXScale, xAxis) {
-    let bottomAxis = d3.axisBottom(newXScale);
+    var bottomAxis = d3.axisBottom(newXScale);
   
     xAxis.transition()
       .duration(300).call(bottomAxis);
@@ -71,12 +71,40 @@ function renderXAxis(newXScale, xAxis) {
   
     yAxis.transition()
       .duration(300).call(leftAxis);
-  
+
     return yAxis;
+  }
+//funtion for updating circles group
+function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
+
+    //poverty
+    if (chosenXAxis === 'In poverty') {
+      var xLabel = 'In Poverty:';
+    }
+    //income
+    else if (chosenXAxis === 'Household income'){
+      var xLabel = 'ousehold Income:';
+    }
+    //age
+    else {
+      var xLabel = 'Age:';
+    }
+//Y label
+  //healthcare
+  if (chosenYAxis ==='Lacks healthcare') {
+    var yLabel = "Lacks Healthcare:"
+  }
+  else if(chosenYAxis === 'obese') {
+    var yLabel = 'Obese:';
+  }
+  //smoking
+  else{
+    var yLabel = 'Smokes:';
   }
 
   // Import our CSV data with d3's .csv import method.
 d3.csv("assets/data/data.csv").then(function(data) {
-    // Visualize the data
-    visualize(data);
-  });
+
+
+
+  
